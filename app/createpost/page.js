@@ -20,15 +20,6 @@ function CreatePost() {
     });
   };
 
-  console.log(title);
-  console.log(postText);
-
-  /* useEffect(() => {
-    if (!isAuth) {
-      navigate("/login");
-    }
-  }, []); */
-
   return (
     <div className="createPostPage">
       <Navbar />
