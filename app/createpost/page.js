@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 
 import { auth, db } from "../config/firebase";
 import Navbar from "../components/Navbar";
 
-function CreatePost() {
+export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
 
@@ -50,5 +50,3 @@ function CreatePost() {
     </div>
   );
 }
-
-export default CreatePost;
