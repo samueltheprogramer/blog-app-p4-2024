@@ -58,13 +58,13 @@ export default function Home() {
         <div className="flex justify-around items-center">
           <div className="flex flex-col justify-center items-center">
             <Image
-              src={auth.currentUser.photoURL}
+              src={auth?.currentUser?.photoURL}
               width={25}
               height={25}
               alt="pic"
               className="rounded-full mt-2"
             />
-            <h1 className="text-white">{auth.currentUser.displayName}</h1>
+            <h1 className="text-white">{auth?.currentUser?.displayName}</h1>
           </div>
           <div>
             <button onClick={handleSignout} className="text-sm">
@@ -101,7 +101,7 @@ export default function Home() {
               </div>
             </div>
             <div className="postTextContainer text-white font-extrabold text-lg  mt-2 bg-blue-300 p-2 rounded-xl">
-              {post.postText}
+              {post?.postText}
             </div>
             <Image
               src={post?.author1?.photoURL}
@@ -111,8 +111,8 @@ export default function Home() {
               className="rounded-full mt-2"
             />
             <h3 className="text-xs">
-              @{post?.author1?.name} <span>@{post.partner1Name}</span>{" "}
-              <span>@{post.partner2Name}</span>
+              @{post?.author1?.name} <span>@{post?.partner1Name}</span>{" "}
+              <span>@{post?.partner2Name}</span>
             </h3>
             <div>
               <input
