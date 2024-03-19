@@ -5,7 +5,6 @@ import { addDoc, collection } from "firebase/firestore";
 
 import { auth, db } from "../config/firebase";
 import Navbar from "../components/Navbar";
-import Image from "next/image";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -33,15 +32,6 @@ export default function CreatePost() {
     <div className="createPostPage  bg-blue-300">
       <div className="bg-blue-800 text-xl font-extrabold text-center text-white w-full">
         <h1>Blog App</h1>
-        <div>
-          <Image
-            src={auth.currentUser.photoURL}
-            width={25}
-            height={25}
-            alt="pic"
-            className="rounded-full mt-2"
-          />
-        </div>
       </div>
       <Navbar />
       <div className="cpContainer mt-6 mb-12">
