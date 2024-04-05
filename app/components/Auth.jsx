@@ -22,8 +22,8 @@ export default function Auth() {
     }
   };
   return (
-    <div className="h-screen w-full flex flex-col items-center justify-center  bg-gradient-to-b from-blue-500 to-red-500 gap-6">
-      <h1 className="text-md font-extrabold ">Welcome To Movie Rating App </h1>
+    <div className="h-screen w-full flex flex-col items-center justify-center  bg-gradient-to-b from-green-500 to-red-500 gap-6">
+      <h1 className="text-md font-extrabold ">Welcome To Movie BlogApp </h1>
       <h1 className="lg:text-4xl text-xl font-extrabold text-white">
         Sign In with Google to Continue
       </h1>
