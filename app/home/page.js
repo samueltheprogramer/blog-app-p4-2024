@@ -33,7 +33,11 @@ export default function Home() {
     }
   };
   const handelUpdateText = async (id, userId, partner1Name, partner2Name) => {
-    if (auth.currentUser.uid === userId || partner1Name || partner2Name) {
+    if (
+      auth.currentUser.uid === userId ||
+      auth.currentUser.uid === partner1Name ||
+      auth.currentUser.uid === partner2Name
+    ) {
       const postDoc = doc(db, "posts", id);
       await updateDoc(postDoc, { postText: updatedText });
     }
