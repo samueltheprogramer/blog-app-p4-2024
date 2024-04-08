@@ -7,6 +7,10 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  addDoc,
+  serverTimestamp,
+  query,
+  onSnapshot,
 } from "firebase/firestore";
 import { auth, db } from "../config/firebase";
 import Image from "next/image";
@@ -20,6 +24,7 @@ export default function Home() {
   const postsCollectionRef = collection(db, "posts");
   const [updatedText, setUpdatedText] = useState("");
   const router = useRouter();
+  const likedBlogsRef = collection(db, "likedBlogs");
 
   const deletePost = async (id, userId, partner1Name, partner2Name) => {
     if (auth.currentUser.uid === userId || partner1Name || partner2Name) {
@@ -42,14 +47,28 @@ export default function Home() {
     }
   };
 
-  const getPosts = async () => {
-    const data = await getDocs(postsCollectionRef);
-    setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-
   useEffect(() => {
-    getPosts();
-  }, [deletePost]);
+    const querydata = query(postsCollectionRef);
+    const unsuscribe = onSnapshot(querydata, (snapshot) => {
+      let blogs = [];
+      snapshot.forEach((doc) => {
+        blogs.push({ ...doc.data(), id: doc.id });
+      });
+      setPostList(blogs);
+    });
+    return () => unsuscribe;
+  }, []);
+
+  const addToLikedBlogs = async (blogTitel, blogText, auther, autherImg) => {
+    await addDoc(likedBlogsRef, {
+      blogTitel,
+      blogText,
+      auther,
+      autherImg,
+      userId: auth.currentUser.uid,
+      createdAt: serverTimestamp(),
+    });
+  };
 
   return (
     <div className="homePage bg-blue-950 h-full">
@@ -137,6 +156,25 @@ export default function Home() {
               >
                 Update Blog
               </button>
+              <div>
+                <label htmlFor="">like:</label>
+                <input
+                  className="rounded-md bg-white"
+                  onChange={(e) => {
+                    e.target.checked
+                      ? addToLikedBlogs(
+                          post?.title,
+                          post?.postText,
+                          post?.author1?.name,
+                          post?.author1?.photoURL
+                        )
+                      : "";
+                  }}
+                  type="checkbox"
+                  name=""
+                  id=""
+                />
+              </div>
             </div>
           </div>
         );

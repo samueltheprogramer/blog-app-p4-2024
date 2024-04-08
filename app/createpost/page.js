@@ -76,7 +76,13 @@ export default function CreatePost() {
             onChange={(e) => setPartner2(e.target.value)}
           />
         </div>
-        <button onClick={createPost}> Submit Post</button>
+        <button
+          onClick={createPost}
+          className="hover:bg-green-500 rounded-full"
+        >
+          {" "}
+          Submit Post
+        </button>
       </div>
     </div>
   );
