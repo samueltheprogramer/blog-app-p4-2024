@@ -25,18 +25,24 @@ export default function Home() {
   const [updatedText, setUpdatedText] = useState("");
   const router = useRouter();
   const likedBlogsRef = collection(db, "likedBlogs");
+  const [partner1NameState, setPartner1NameState] = useState();
+  const [partner2NameState, setPartner2NameState] = useState();
 
   const deletePost = async (id, userId, partner1Name, partner2Name) => {
+    setPartner1NameState(partner1Name);
+    setPartner2NameState(partner2Name);
     if (auth.currentUser.uid === userId || partner1Name || partner2Name) {
       const postDoc = doc(db, "posts", id);
       await deleteDoc(postDoc);
     }
   };
   const handelUpdateText = async (id, userId, partner1Name, partner2Name) => {
+    setPartner1NameState(partner1Name);
+    setPartner2NameState(partner2Name);
     if (
       auth.currentUser.uid === userId ||
-      auth.currentUser.uid === partner1Name ||
-      auth.currentUser.uid === partner2Name
+      partner1NameState === partner1Name ||
+      partner2NameState === partner2Name
     ) {
       const postDoc = doc(db, "posts", id);
       await updateDoc(postDoc, { postText: updatedText });
